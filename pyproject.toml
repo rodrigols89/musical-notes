@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "musical-notes"
+version = "0.1.0"
+description = ""
+authors = ["drigols <drigols.creative@gmail.com>"]
+readme = "README.md"
+packages = [{include = "musical_notes"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
