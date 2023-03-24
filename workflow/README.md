@@ -10,6 +10,15 @@
  - [Init the repository with the git tool](#init-git)
  - [Adding .gitignore and .editorconfig](#gitignore-editorconfig)
  - [Adding LICENSE.md](#license)
+ - [Adding Pytest and Pytest-Cov ("dev" group)](#pytest-cov)
+ - [Adding Taskipy](#taskipy)
+ - [Adding blue (PEP8: code formatter + analyze)](#blue)
+ - [Adding isort (reorder import library)](#isort)
+ - [Adding mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)](#mkdocs)
+ - [](#)
+ - [](#)
+ - [](#)
+ - [](#)
  - [](#)
 
 ---
@@ -78,8 +87,6 @@ However, we have two types of intervals:
 
 ## Init the project with Poetry
 
-Now, let's init our project using the poetry tool:
-
 ```
 poetry new musical-notes
 ```
@@ -96,12 +103,11 @@ poetry shell
 
 ## Init the repository with the git tool
 
-Now, let's init our repository with the git tool:
-
 ```
 git init .
 ```
 
+**NOTE**  
 Now, let's create our repository on the cloud (GitHub):
 
 ```
@@ -129,10 +135,523 @@ Now, let's add a [LICENSE.md](../LICENSE.md) to the project.
 
 ---
 
+<div id="pytest-cov"></div>
+
+## Adding Pytest and Pytest-Cov ("dev" group)
+
+Now, let's add Pytest to the project:
+
+```
+poetry add --group dev pytest@latest pytest-cov@latest
+```
+
+**NOTE**  
+See that we group the test libraries in the de "dev" group.
+
+---
+
+<div id="taskipy"></div>
+
+## Adding Taskipy
+
+```
+poetry add --group dev taskipy@latest
+```
+
+---
+
+<div id="blue"></div>
+
+## Adding blue (PEP8: code formatter + analyze)
+
+```
+poetry add --group dev blue@latest
+```
+
+---
+
+<div id="isort"></div>
+
+## Adding isort (reorder import library)
+
+```
+poetry add --group dev isort@latest
+```
+
+---
+
+<div id="mkdocs"></div>
+
+## Adding mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)
+
+```
+poetry add --group doc mkdocs-material@latest mkdocstrings@latest mkdocstrings-python@latest
+```
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
 
 
 
 
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
+
+
+```
+
+```
+
+
+
+
+
+
+
+---
+
+<div id=""></div>
+
+##
 
 
 ```
