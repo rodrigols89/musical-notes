@@ -8,14 +8,14 @@
  - [Musical notes theory](#musical-notes-theory)
  - [Init the project with Poetry](#init-poetry)
  - [Init the repository with the git tool](#init-git)
- - [Adding .gitignore and .editorconfig](#gitignore-editorconfig)
- - [Adding LICENSE.md](#license)
- - [Adding Pytest and Pytest-Cov ("dev" group)](#pytest-cov)
- - [Adding Taskipy](#taskipy)
- - [Adding blue (PEP8: code formatter + analyze)](#blue)
- - [Adding isort (reorder import library)](#isort)
- - [Adding mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)](#mkdocs)
- - [](#)
+ - [Add .gitignore and .editorconfig](#gitignore-editorconfig)
+ - [Add LICENSE.md](#license)
+ - [Add Pytest and Pytest-Cov ("dev" group)](#pytest-cov)
+ - [Add Taskipy](#taskipy)
+ - [Add blue (PEP8: code formatter + analyze)](#blue)
+ - [Add isort (reorder import library)](#isort)
+ - [Add mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)](#mkdocs)
+ - [Init mkdocs settings (mkdocs new .)](#init-mkdocs)
  - [](#)
  - [](#)
  - [](#)
@@ -190,20 +190,82 @@ poetry add --group doc mkdocs-material@latest mkdocstrings@latest mkdocstrings-p
 
 ---
 
-<div id=""></div>
+<div id="init-mkdocs"></div>
 
-##
+## Init mkdocs settings (mkdocs new .)
 
+Now, let's init our mkdocs sources. For it, let's pass the path (root for us):
 
 ```
-
+mkdocs new .
 ```
 
+**OUTPUT:**  
+```
+INFO     -  Writing config file: ./mkdocs.yml
+INFO     -  Writing initial docs: ./docs/index.md
+```
 
+To test we can se mkdocs serve:
 
+```
+mkdocs serve
+```
 
+**OUTPUT:**  
+```
+INFO     -  Building documentation...
+INFO     -  Cleaning site directory
+INFO     -  Documentation built in 0.04 seconds
+INFO     -  [08:52:04] Watching paths for changes: 'docs', 'mkdocs.yml'
+INFO     -  [08:52:04] Serving on http://127.0.0.1:8000/
+```
 
+> **NOTE:**  
+> To test open the server address to test: **http://127.0.0.1:8000/**
 
+Now, let's apply some settings. For it, open the generated [mkdocs.yml](../mkdocs.yml):
+
+[mkdocs.yml](../mkdocs.yml)
+```
+site_name: Musical Notes
+repo_url: https://github.com/drigols/musical-notes
+repo_name: drigols/musical-notes
+edit_uri: tree/master/docs
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    primary: black
+
+markdown_extensions:
+  - attr_list # Allow apply styles ![](){width=xxx .center}.
+
+extra_css:
+  - stylesheets/extra.css
+```
+
+To edit the main content open the [index.md](../docs/index.md):
+
+[index.md](../docs/index.md)
+```
+![project-logo](assets/logo.png){width=300 .center}
+# Musical Notes
+```
+
+Now, let's see how to apply stylesheet on our docs:
+
+[extra.css](../docs/stylesheets/extra.css)
+```
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+```
 
 ---
 
