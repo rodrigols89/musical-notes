@@ -6,8 +6,8 @@
 
  - [Project Goals](#goals)
  - [Musical notes theory](#musical-notes-theory)
- - [Init the project with Poetry](#init-poetry)
- - [Init the repository with the git tool](#init-git)
+ - [Start the project with Poetry](#init-poetry)
+ - [Start the repository with the git tool](#init-git)
  - [Add .gitignore and .editorconfig](#gitignore-editorconfig)
  - [Add LICENSE.md](#license)
  - [Add Pytest and Pytest-Cov ("dev" group)](#pytest-cov)
@@ -15,11 +15,10 @@
  - [Add blue (PEP8: code formatter + analyze)](#blue)
  - [Add isort (reorder import library)](#isort)
  - [Add mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)](#mkdocs)
- - [Init mkdocs settings (mkdocs new .)](#init-mkdocs)
- - [](#)
- - [](#)
- - [](#)
- - [](#)
+ - [Start mkdocs settings (mkdocs new .)](#init-mkdocs)
+ - [Start Pytest settings](#start-pytest)
+ - [Testing Blue (PEP8: code formatter + analyze)](#testing-blue)
+ - [Add tasks](#add-tasks)
 
 ---
 
@@ -85,7 +84,7 @@ However, we have two types of intervals:
 
 <div id="init-poetry"></div>
 
-## Init the project with Poetry
+## Start the project with Poetry
 
 ```
 poetry new musical-notes
@@ -101,7 +100,7 @@ poetry shell
 
 <div id="init-git"></div>
 
-## Init the repository with the git tool
+## Start the repository with the git tool
 
 ```
 git init .
@@ -121,7 +120,7 @@ He will ask some questions to create the repository. Answer and create the repos
 
 <div id="gitignore-editorconfig"></div>
 
-## Adding .gitignore and .editorconfig
+## Add .gitignore and .editorconfig
 
 Now, let's add [.gitignore](../.gitignore) and [.editorconfig](../.editorconfig) to the project.
 
@@ -129,7 +128,7 @@ Now, let's add [.gitignore](../.gitignore) and [.editorconfig](../.editorconfig)
 
 <div id="license"></div>
 
-## Adding LICENSE.md
+## Add LICENSE.md
 
 Now, let's add a [LICENSE.md](../LICENSE.md) to the project.
 
@@ -137,7 +136,7 @@ Now, let's add a [LICENSE.md](../LICENSE.md) to the project.
 
 <div id="pytest-cov"></div>
 
-## Adding Pytest and Pytest-Cov ("dev" group)
+## Add Pytest and Pytest-Cov ("dev" group)
 
 Now, let's add Pytest to the project:
 
@@ -152,7 +151,7 @@ See that we group the test libraries in the de "dev" group.
 
 <div id="taskipy"></div>
 
-## Adding Taskipy
+## Add Taskipy
 
 ```
 poetry add --group dev taskipy@latest
@@ -162,7 +161,7 @@ poetry add --group dev taskipy@latest
 
 <div id="blue"></div>
 
-## Adding blue (PEP8: code formatter + analyze)
+## Add blue (PEP8: code formatter + analyze)
 
 ```
 poetry add --group dev blue@latest
@@ -182,7 +181,7 @@ poetry add --group dev isort@latest
 
 <div id="mkdocs"></div>
 
-## Adding mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)
+## Add mkdocs-material, mkdocstrings and mkdocstrings-python ("doc" group)
 
 ```
 poetry add --group doc mkdocs-material@latest mkdocstrings@latest mkdocstrings-python@latest
@@ -192,9 +191,9 @@ poetry add --group doc mkdocs-material@latest mkdocstrings@latest mkdocstrings-p
 
 <div id="init-mkdocs"></div>
 
-## Init mkdocs settings (mkdocs new .)
+## Start mkdocs settings (mkdocs new .)
 
-Now, let's init our mkdocs sources. For it, let's pass the path (root for us):
+Now, let's start our mkdocs settings. For it, let's pass the path (root for us):
 
 ```
 mkdocs new .
@@ -269,461 +268,74 @@ Now, let's see how to apply stylesheet on our docs:
 
 ---
 
-<div id=""></div>
+<div id="start-pytest"></div>
 
-##
+## Start Pytest settings
 
+To settings our Pytest first we need to define it in [pyproject.toml](../pyproject.toml):
 
+[pyproject.toml](../pyproject.toml)
+```py
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "--doctest-modules"
 ```
-
-```
-
-
-
-
-
-
 
 ---
 
-<div id=""></div>
+<div id="testing-blue"></div>
 
-##
+## Testing Blue (PEP8: code formatter + analyze)
 
+Imagine we have the following **Python** file:
 
+[musical_notes/test.py](../musical_notes/test.py)
+```
+name = "Rodrigo"
 ```
 
+ - **If we just run *"blue ."*, he will format the code automatically, we don't know what was modified**.
+ - We can also use two different approaches to know what needs to change:
+   - `blue --check .`
+     - Tells you if you have any issues to fix, but not what they are.
+   - `blue --check --diff .`
+     - Tells you if you have any issues to fix, and what they are.
+
+For example, if we run:
+
+```
+blue --check --diff .
 ```
 
+**OUTPUT:**
+```
+--- musical_notes/test.py       2023-03-31 16:46:45.855618 +0000
++++ musical_notes/test.py       2023-03-31 16:52:29.974415 +0000
+@@ -1 +1 @@
+-name = "Rodrigo"
++name = 'Rodrigo'
+would reformat musical_notes/test.py
+```
 
-
-
-
-
+Now, we just need to solve that.
 
 ---
 
-<div id=""></div>
+<div id="add-tasks"></div>
 
-##
+## Add tasks
 
+Now, let's add some tasks to the project:
 
+[pyproject.toml](../pyproject.toml)
+```python
+[tool.taskipy.tasks]
+lint = "blue --check --diff . && isort --check --diff ."
+docs = "mkdocs serve"
+pre_test = "task lint" # Pre test.
+test = "pytest -s -x --cov=musical_notes -vv"
+post_test = "coverage html" # Post test.
 ```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
-
-
----
-
-<div id=""></div>
-
-##
-
-
-```
-
-```
-
-
-
-
-
 
 ---
 
