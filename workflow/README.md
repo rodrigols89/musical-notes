@@ -19,6 +19,8 @@
  - [Start Pytest settings](#start-pytest)
  - [Testing Blue (PEP8: code formatter + analyze)](#testing-blue)
  - [Add tasks](#add-tasks)
+ - [Planning and Implementing the scales.py](#planning-implementing-scale-py)
+ - [Create a mkdocs to our function scales.py](#mkdocs-scales-py)
 
 ---
 
@@ -336,6 +338,156 @@ pre_test = "task lint" # Pre test.
 test = "pytest -s -x --cov=musical_notes -vv"
 post_test = "coverage html" # Post test.
 ```
+
+---
+
+<div id="planning-implementing-scale-py"></div>
+
+## Planning and Implementing the scales.py
+
+Now, let's planning and implementing the [scales.py](../musical_notes/scales.py). Let's start from docstring and from it implement the function. For example, which parameter does the function have?
+
+[scales.py](../musical_notes/scales.py)
+```python
+def scales():
+    """
+    >>> scales('C', 'major')
+    """
+    ...
+```
+
+**OUTPUT:**  
+```
+TypeError: scales() takes 0 positional arguments but 2 were given
+```
+
+> **NOTE:**  
+> See that the function should have two parameters, but doesn't have any.
+
+Ok, let's implement these parameters:
+
+[scales.py](../musical_notes/scales.py)
+```python
+def scales(note, key):
+    """
+    >>> scales('C', 'major')
+    """
+    ...
+```
+
+**RUNG TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+1 passed in 0.11s
+```
+
+> **Ok, but what output should the function have?**
+
+Let's, implement in the docstring an output example:
+
+[scales.py](../musical_notes/scales.py)
+```python
+def scales(note, key):
+    """
+    >>> scales('C', 'major')
+    {'notes': ['C, 'D', 'E', 'F', 'G', 'A', 'B'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
+    """
+    ...
+```
+
+**RUNG TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+>>> scales('C', 'major')
+Expected:
+    {'notes': ['C, 'D', 'E', 'F', 'G', 'A', 'B'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
+Got nothing
+```
+
+Well, we have to implement this output now:
+
+[scales.py](../musical_notes/scales.py)
+```python
+NOTES = 'C C# D D# E F F# G G# A A# B'.split()
+ESCALES = {'major': (0, 2, 4, 5, 7, 9, 11)}
+
+
+def scales(note: str, key: str) -> dict[str, list[str]]:
+    """
+    Generate a scale from a note and a tone (key).
+
+    Parameters:
+        note: The note that will be the tonic of the scale.
+        key: Scale tone (key).
+
+    Returns:
+        A dictionary with the scale notes and degree. Inside of the dictionary, the key is a string (str) and a value is a list of strings.
+
+    Examples:
+        >>> scales('C', 'major')
+        {'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'B'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
+
+        >>> scales('A', 'major')
+        {'notes': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
+    """
+    intervals = ESCALES[key]
+    key_post = NOTES.index(note)
+    temp = []
+
+    for interval in intervals:
+        note = (key_post + interval) % 12
+        temp.append(NOTES[note])
+
+    return {'notes': temp, 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
+```
+
+**RUNG TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+1 passed in 0.10s
+```
+
+---
+
+<div id="mkdocs-scales-py"></div>
+
+## Create a mkdocs to our function scales.py
+
+Now, let's create a mkdocs API to our [scales.py](../musical_notes/scales.py).
+
+ - First create a folder in **docs/api**, next, create **scales.md**.
+
+Inside [docs/api/scales.md](../docs/api/scales.md) add:
+
+[docs/api/scales.md](../docs/api/scales.md)
+```
+::: scales
+```
+
+Now, let's add a plugin to our mkdocs settings:
+
+[mkdocs.yml](../mkdocs.yml)
+```python
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [musical_notes]
+```
+
+Finally, run **"task docs"** to testin.
 
 ---
 
