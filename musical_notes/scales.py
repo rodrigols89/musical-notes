@@ -2,7 +2,7 @@ NOTES = 'C C# D D# E F F# G G# A A# B'.split()
 ESCALES = {'major': (0, 2, 4, 5, 7, 9, 11)}
 
 
-def scales(note: str, key: str) -> dict[str, list[str]]:
+def scale(note: str, key: str) -> dict[str, list[str]]:
     """
     Generate a scale from a note and a tone (key).
 
@@ -13,15 +13,22 @@ def scales(note: str, key: str) -> dict[str, list[str]]:
     Returns:
         A dictionary with the scale notes and degree. Inside of the dictionary, the key is a string (str) and a value is a list of strings.
 
+    Raises:
+        ValueError: When passing a non-existent note.
+
     Examples:
-        >>> scales('C', 'major')
+        >>> scale('C', 'major')
         {'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'B'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
 
-        >>> scales('A', 'major')
+        >>> scale('a', 'major')
         {'notes': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
     """
+    note = note.upper()
     intervals = ESCALES[key]
-    key_post = NOTES.index(note)
+    try:
+        key_post = NOTES.index(note)
+    except ValueError:
+        raise ValueError(f'That note does not exist, try {NOTES}')
     temp = []
 
     for interval in intervals:

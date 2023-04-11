@@ -20,7 +20,10 @@
  - [Testing Blue (PEP8: code formatter + analyze)](#testing-blue)
  - [Add tasks](#add-tasks)
  - [Planning and Implementing the scales.py](#planning-implementing-scale-py)
- - [Create a mkdocs to our function scales.py](#mkdocs-scales-py)
+ - [Create a mkdocs to our scales.py function](#mkdocs-scales-py)
+ - [Intro to AAA (3A or A3) tests](#intro-to-aaa)
+ - [Add test for our function to work with lowercase notes](#test-lowercase-notes)
+ - [Add test when pass note (argument) does not exist](#test-pass-note-does-not-exist)
 
 ---
 
@@ -345,7 +348,7 @@ post_test = "coverage html" # Post test.
 
 ## Planning and Implementing the scales.py
 
-Now, let's planning and implementing the [scales.py](../musical_notes/scales.py). Let's start from docstring and from it implement the function. For example, which parameter does the function have?
+Now, let's planning and implementing the [scale.py](../musical_notes/scale.py). Let's start from docstring and from it implement the function. For example, which parameter does the function have?
 
 [scales.py](../musical_notes/scales.py)
 ```python
@@ -420,7 +423,7 @@ NOTES = 'C C# D D# E F F# G G# A A# B'.split()
 ESCALES = {'major': (0, 2, 4, 5, 7, 9, 11)}
 
 
-def scales(note: str, key: str) -> dict[str, list[str]]:
+def scale(note: str, key: str) -> dict[str, list[str]]:
     """
     Generate a scale from a note and a tone (key).
 
@@ -432,12 +435,13 @@ def scales(note: str, key: str) -> dict[str, list[str]]:
         A dictionary with the scale notes and degree. Inside of the dictionary, the key is a string (str) and a value is a list of strings.
 
     Examples:
-        >>> scales('C', 'major')
+        >>> scale('C', 'major')
         {'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'B'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
 
-        >>> scales('A', 'major')
+        >>> scale('a', 'major')
         {'notes': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'], 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
     """
+    note = note.upper()
     intervals = ESCALES[key]
     key_post = NOTES.index(note)
     temp = []
@@ -449,7 +453,7 @@ def scales(note: str, key: str) -> dict[str, list[str]]:
     return {'notes': temp, 'key': ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']}
 ```
 
-**RUNG TASK:**  
+**RUN TASK:**  
 ```
 task test
 ```
@@ -463,7 +467,7 @@ task test
 
 <div id="mkdocs-scales-py"></div>
 
-## Create a mkdocs to our function scales.py
+## Create a mkdocs to our scales.py function
 
 Now, let's create a mkdocs API to our [scales.py](../musical_notes/scales.py).
 
@@ -491,4 +495,123 @@ Finally, run **"task docs"** to testin.
 
 ---
 
+<div id="intro-to-aaa"></div>
+
+## Intro to AAA (3A or A3) tests
+
+For our tests we will use AAA (3A or A3) Approach, which means:
+
+ - **Arrange**
+   - PT-BR = Arrumar
+ - **Act**
+   - PT-BR = Agir
+ - **Assert**
+   - PT-BR = Garantir
+
+---
+
+<div id="test-lowercase-notes"></div>
+
+## Add test for our function to work with lowercase notes
+
+Now, let's add a test to check if our **"scale"** function works with lowercase notes *(following AAA approach)*:
+
+[test_scales.py](../tests/test_scales.py)
+```python
+def test_scale_must_work_with_lowercase_notes():
+    # Arrange
+    note = 'c'
+    key = 'major'
+
+    # Act
+    result = scale(note, key)
+
+    # Assert
+    assert result
+```
+
+**RUN TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+2 passed in 0.11s
+```
+
+---
+
+<div id="test-pass-note-does-not-exist"></div>
+
+## Add test when pass note (argument) does not exist
+
+Now, let's add a test to check when a invalid note is passed:
+
+[scales.py](../musical_notes/scales.py)
+```python
+#.............
+
+    """
+    .....................
+
+    Raises:
+        ValueError: When passing a non-existent note.
+
+    .....................
+    """
+
+    try:
+        key_post = NOTES.index(note)
+    except ValueError:
+        raise ValueError(f'That note does not exist, try {NOTES}')
+
+#............
+```
+
+[test_scales.py](../tests/test_scales.py)
+```python
+from pytest import raises
+
+def test_scale_must_return_an_error_saying_that_the_note_not_exists():
+    # Arrange
+    note = 'X'
+    key = 'major'
+    error_message = f'That note does not exist, try {NOTES}'
+
+    # Act
+    with raises(ValueError) as error:
+        scale(note, key)
+
+    # Assert
+    assert error_message == error.value.args[0]
+```
+
+**RUN TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+3 passed in 0.07s
+```
+
+---
+
 Ro**drigo** **L**eite da **S**ilva - **drigols**
+
+[](../)
+```python
+
+```
+
+**RUN TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+
+```
