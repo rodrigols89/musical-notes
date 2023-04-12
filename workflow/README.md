@@ -24,6 +24,7 @@
  - [Intro to AAA (3A or A3) tests](#intro-to-aaa)
  - [Add test for our function to work with lowercase notes](#test-lowercase-notes)
  - [Add test when pass note (argument) does not exist](#test-pass-note-does-not-exist)
+ - [Add test when key (tone argument) exists](#test-key-not-exists)
 
 ---
 
@@ -595,6 +596,64 @@ task test
 **OUTPUT:**  
 ```
 3 passed in 0.07s
+```
+
+---
+
+<div id="test-key-not-exists"></div>
+
+## Add test when key (tone argument) exists
+
+Now, let's add a test when the user passes a not exist key (tone):
+
+[test_scales.py](../tests/test_scales.py)
+```python
+def test_scale_key_not_exists():
+    # Arrange
+    note = 'X'
+    key = 'banana'
+    error_message = f'That key (tone) does not exist or not does implemented, try {list(SCALES.keys())}'
+
+    # Act
+    with raises(KeyError) as error:
+        scale(note, key)
+
+    # Assert
+    assert error_message == error.value.args[0]
+```
+
+[scales.py](../musical_notes/scales.py)
+```python
+#...........................
+
+    """
+    ........................
+
+    Raises:
+        ValueError: When passing a non-existent note.
+        KeyError: When key (tone) does not exist or not does implemented.
+
+    ........................
+    """
+    try:
+        intervals = SCALES[key]
+    except KeyError:
+        raise KeyError(
+            'That key (tone) does not exist or not does implemented, '
+            f'try {list(SCALES.keys())}'
+        )
+
+#...........................
+```
+
+**RUN TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```
+4 passed in 0.11s
 ```
 
 ---
