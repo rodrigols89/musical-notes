@@ -26,6 +26,7 @@
  - [Add test when pass note (argument) does not exist](#test-pass-note-does-not-exist)
  - [Add test when key (tone argument) exists](#test-key-not-exists)
  - [How to use `"@mark.parametrize"` to make fake parameters for your tests](#mark-parametrize-fake-parameters)
+ - [Understanding "coverage"](#understanding-coverage)
 
 ---
 
@@ -741,16 +742,27 @@ tests/test_scales.py::test_scale_must_return_correct_note[F-expected2] PASSED
 
 ---
 
+<div id="Understanding-coverage"></div>
+
+## Understanding "coverage"
+
+To understand the "coverage" library see the image below:
+
+![img](images/cov-01.png)  
+
+ - **7 statements were run:**
+   - Green filled.
+ - **7 statements were not run (that's, no coverage):**
+   - Red filled.
+   - That's, no coverage.
+
+---
+
 <div id=""></div>
 
 ## x
 
 x
-
-
-
-
-
 
 
 
