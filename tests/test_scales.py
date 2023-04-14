@@ -1,4 +1,4 @@
-from pytest import raises
+from pytest import mark, raises
 
 from musical_notes.scales import NOTES, SCALES, scale
 
@@ -41,3 +41,20 @@ def test_scale_key_not_exists():
 
     # Assert
     assert error_message == error.value.args[0]
+
+
+@mark.parametrize(
+    # Arrange
+    'note, expected',
+    [
+        ('C', ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
+        ('C#', ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']),
+        ('F', ['F', 'G', 'A', 'A#', 'C', 'D', 'E']),
+    ],
+)
+def test_scale_must_return_correct_note(note, expected):
+    # Act
+    result = scale(note, 'major')
+
+    # Assert
+    assert result['notes'] == expected

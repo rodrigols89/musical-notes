@@ -25,6 +25,7 @@
  - [Add test for our function to work with lowercase notes](#test-lowercase-notes)
  - [Add test when pass note (argument) does not exist](#test-pass-note-does-not-exist)
  - [Add test when key (tone argument) exists](#test-key-not-exists)
+ - [How to use `"@mark.parametrize"` to make fake parameters for your tests](#mark-parametrize-fake-parameters)
 
 ---
 
@@ -655,6 +656,112 @@ task test
 ```
 4 passed in 0.11s
 ```
+---
+
+<div id="mark-parametrize-fake-parameters"></div>
+
+## How to use `"@mark.parametrize"` to make fake parameters for your tests
+
+> Now, imagine you need to test when you pass a note the return is correct. Ok, you will need to test all possible returns.
+
+For that, let's use `"@mark.parametrize"` to create fake parameters to test the returns of all notes.
+
+[test_scales.py](../tests/test_scales.py)
+```python
+@mark.parametrize(
+    # Arrange
+    'note, expected',
+    [
+        ('C', ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
+        ('C#', ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']),
+        ('F', ['F', 'G', 'A', 'A#', 'C', 'D', 'E']),
+    ],
+)
+def test_scale_must_return_correct_note(note, expected):
+    # Act
+    result = scale(note, 'major')
+
+    # Assert
+    assert result['notes'] == expected
+```
+
+**RUN TASK:**  
+```
+task test
+```
+
+**OUTPUT:**  
+```python
+musical_notes/scales.py::musical_notes.scales.scale PASSED
+tests/test_scales.py::test_scale_must_work_with_lowercase_notes PASSED
+tests/test_scales.py::test_scale_must_return_an_error_saying_that_the_note_not_exists PASSED
+tests/test_scales.py::test_scale_key_not_exists PASSED
+tests/test_scales.py::test_scale_must_return_correct_note[C-expected0] PASSED
+tests/test_scales.py::test_scale_must_return_correct_note[C#-expected1] PASSED
+tests/test_scales.py::test_scale_must_return_correct_note[F-expected2] PASSED
+```
+
+See that now, we have the "Arrange" step separated in the `"@mark.parametrize"`:
+
+```python
+@mark.parametrize(
+    # Arrange
+    'note, expected',
+    [
+        ('C', ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
+        ('C#', ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']),
+        ('F', ['F', 'G', 'A', 'A#', 'C', 'D', 'E']),
+    ],
+)
+```
+
+ - **Parameters:**
+   - **note -** For example, `note` passsed by the user:
+     - `C` or `C#` for our test
+   - **expected -** *Expected result* by the passed note:
+     - `['C', 'D', 'E', 'F', 'G', 'A', 'B']`
+     - `['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']`
+     -  `['F', 'G', 'A', 'A#', 'C', 'D', 'E']`
+
+**NOTE:**  
+See also that the test function receives two parameters (note and expected); Declared in `"@mark.parametrize"`:
+
+```python
+def test_deve_retornar_as_notas_corretas(note, expected):
+    ...
+```
+
+If you pay attention to the Pytest return you can see the tests:
+
+```python
+tests/test_scales.py::test_scale_must_return_correct_note[C-expected0] PASSED
+tests/test_scales.py::test_scale_must_return_correct_note[C#-expected1] PASSED
+tests/test_scales.py::test_scale_must_return_correct_note[F-expected2] PASSED
+```
+
+---
+
+<div id=""></div>
+
+## x
+
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
