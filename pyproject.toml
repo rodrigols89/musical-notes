@@ -6,6 +6,9 @@ authors = ["drigols <drigols.creative@gmail.com>"]
 readme = "README.md"
 packages = [{include = "musical_notes"}]
 
+[tool.poetry.scripts]
+scales = "musical_notes.cli:app"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 typer = "^0.7.0"
