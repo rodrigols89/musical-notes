@@ -27,6 +27,10 @@
  - [Add test when key (tone argument) exists](#test-key-not-exists)
  - [How to use `"@mark.parametrize"` to make fake parameters for your tests](#mark-parametrize-fake-parameters)
  - [Understanding "coverage"](#understanding-coverage)
+ - [Typer test instance "CliRunner"](#typer-test-instance)
+ - [exit_code (0=Ok, 1=Error)](#exit-code)
+ - [Using "stdout" and "pytest -v" to check (test) CLI return](#stdout-pytest-v)
+ - [Creating a script (CLI) for our application (Adding our CLI to pyproject.toml)](#creating-scrit-cli)
 
 ---
 
@@ -758,22 +762,133 @@ To understand the "coverage" library see the image below:
 
 ---
 
-<div id=""></div>
+<div id="typer-test-instance"></div>
 
-## x
+## Typer test instance "CliRunner" 
 
-x
+The Typer library has a test instance called **"CliRunner"** that stays:
 
+```python
+from typer.testing import CliRunner
+```
 
+With this, we can invoker/call functions to test:
 
+```python
+runner = CliRunner()  # Arrange
 
+result = runner.invoke(app)
+```
 
+---
 
+<div id="exit-code"></div>
 
+## exit_code (0=Ok, 1=Error)
 
+We can also use **"exit_code"** to test if our CLI command has some error. For example:
 
+```python
+def test_scale_cli_must_return_zero_stdout():
+    result = runner.invoke(app)  # Act
 
+    # Assert
+    assert result.exit_code == 0  # exit_code is 0 when not having an error.
+```
 
+---
+
+<div id="stdout-pytest-v"></div>
+
+## Using "stdout" and "pytest -v" to check (test) CLI return
+
+We can also use stdout to check (test) CLI return. For example:
+
+```python
+def test_scale_cli_must_contain_notes_in_the_answer():
+    # Arrange
+    note = 'C'
+
+    result = runner.invoke(app)  # Act
+
+    # Assert
+    assert note == result.stdout
+```
+
+Now, if you run **"pytest . -v"**:
+
+```
+pytest . -v
+```
+
+**OUTPUT:**  
+```python
+        # Assert
+>       assert note == result.stdout
+E       AssertionError: assert 'C' == '┌───┬────┬──...────┴─────┘\n'
+E         + C
+E         - ┌───┬────┬─────┬────┬───┬────┬─────┐
+E         - │ I │ II │ III │ IV │ V │ VI │ VII │
+E         - ├───┼────┼─────┼────┼───┼────┼─────┤
+E         - │ C │ D  │ E   │ F  │ G │ A  │ B   │
+E         - └───┴────┴─────┴────┴───┴────┴─────┘
+
+tests\test_cli.py:22: AssertionError
+============================================ short test summary info ===============================================
+FAILED tests/test_cli.py::test_scale_cli_must_contain_notes_in_the_answer - AssertionError: assert 'C' == '┌───┬────┬──...────┴─────┘\n'
+=========================================== 1 failed, 8 passed in 0.30s ============================================
+```
+
+**NOTE:**  
+See that we are comparing the "C" musical note with a Typer/+Rich table, for that our test FAILED. To solve that we need to test if the "C" musical note is in Typer/+Rich table. For example:
+
+```python
+assert note in result.stdout
+```
+
+**OUTPUT:**  
+```python
+tests/test_cli.py::test_scale_cli_must_contain_notes_in_the_answer PASSED                 [100%]
+```
+
+**NOTE:**  
+See that now our test **PASSED**.
+
+---
+
+<div id="creating-scrit-cli"></div>
+
+## Creating a script (CLI) for our application (Adding our CLI to pyproject.toml)
+
+> Now, let's create a script (CLI) for our application. For that, we need to add our CLI to [pyproject.toml](../pyproject.toml).
+
+For example:
+
+[pyproject.toml](../pyproject.toml)
+```python
+[tool.poetry.scripts]
+scales = "musical_notes.cli:app"
+```
+
+That means:
+
+ - **musical_notes =** package or folder
+   - **cli =** `cli.py` in package or folder musical_notes
+     - **app =** Typer instance in `cli.py`:
+       - app = Typer()
+
+```bash
+poetry run scales
+```
+
+**OUTPUT:**  
+```
+┏━━━┳━━━━┳━━━━━┳━━━━┳━━━┳━━━━┳━━━━━┓
+┃ I ┃ II ┃ III ┃ IV ┃ V ┃ VI ┃ VII ┃
+┡━━━╇━━━━╇━━━━━╇━━━━╇━━━╇━━━━╇━━━━━┩
+│ C │ D  │ E   │ F  │ G │ A  │ B   │
+└───┴────┴─────┴────┴───┴────┴─────┘
+```
 
 ---
 
