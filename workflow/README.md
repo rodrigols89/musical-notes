@@ -867,18 +867,19 @@ For example:
 [pyproject.toml](../pyproject.toml)
 ```python
 [tool.poetry.scripts]
-scales = "musical_notes.cli:app"
+musical-notes = "musical_notes.cli:app"
 ```
 
 That means:
 
+ - **musical-notes =** Command name.
  - **musical_notes =** package or folder
    - **cli =** `cli.py` in package or folder musical_notes
      - **app =** Typer instance in `cli.py`:
        - app = Typer()
 
 ```bash
-poetry run scales
+poetry run musical-notes scale
 ```
 
 **OUTPUT:**  
@@ -889,6 +890,22 @@ poetry run scales
 │ C │ D  │ E   │ F  │ G │ A  │ B   │
 └───┴────┴─────┴────┴───┴────┴─────┘
 ```
+
+```bash
+poetry run musical-notes chord
+```
+
+**OUTPUT:**  
+```
+┏━━━┳━━━━━┳━━━┓
+┃ I ┃ III ┃ V ┃
+┡━━━╇━━━━━╇━━━┩
+│ C │ E   │ G │
+└───┴─────┴───┘
+```
+
+**NOTE:**  
+See that now we have the main command **"musical-notes"** and some subcommands: **scale**, **chord**,....
 
 ---
 
