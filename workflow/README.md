@@ -872,11 +872,11 @@ musical-notes = "musical_notes.cli:app"
 
 That means:
 
- - **musical-notes =** Command name.
- - **musical_notes =** package or folder
-   - **cli =** `cli.py` in package or folder musical_notes
-     - **app =** Typer instance in `cli.py`:
-       - app = Typer()
+ - **musical-notes =** Main command CLI name.
+   - **musical_notes =** package or folder
+     - **cli =** `cli.py` in package or folder musical_notes
+       - **app =** Typer instance in `cli.py`:
+         - app = Typer()
 
 ```bash
 poetry run musical-notes scale
