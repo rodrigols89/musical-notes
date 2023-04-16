@@ -9,12 +9,12 @@ app = Typer()
 
 
 @app.command()
-def scales(note=Argument('c'), key=Argument('major')):
+def scales(tonic=Argument('c'), key=Argument('major')):
     table = Table()
 
-    notes, grades = scale(note, key).values()
+    notes, degrees = scale(tonic, key).values()
 
-    for grade in grades:
-        table.add_column(grade)
+    for degree in degrees:
+        table.add_column(degree)  # Add header (degrees)
     table.add_row(*notes)  # Add row/+Unpacking approach (*)
     console.print(table)  # print table.
