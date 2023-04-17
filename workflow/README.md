@@ -909,6 +909,20 @@ See that now we have the main command **"musical-notes"** and some subcommands: 
 
 ---
 
+<div id="hot-reload-mkdocs"></div>
+
+## Add Hot-Reload to our mkdocs
+
+To add Hot-Reload to our mkdocs is very easy:
+
+[mkdocs.yml](../mkdocs.yml)
+```
+watch:
+  - musical_notes
+```
+
+---
+
 Ro**drigo** **L**eite da **S**ilva - **drigols**
 
 [](../)
