@@ -1,5 +1,8 @@
 NOTES = 'C C# D D# E F F# G G# A A# B'.split()
-SCALES = {'major': (0, 2, 4, 5, 7, 9, 11)}
+SCALES = {
+    'major': (0, 2, 4, 5, 7, 9, 11),
+    'minor': (0, 2, 3, 5, 7, 8, 10),
+}
 
 
 def scale(tonic: str, key: str) -> dict[str, list[str]]:
@@ -11,7 +14,7 @@ def scale(tonic: str, key: str) -> dict[str, list[str]]:
         key: Scale key (PT-BR=tonalidade).
 
     Returns:
-        A dictionary with the scale "notes" and "degrees" (PT-BR=graus). Inside of the dictionary, the key (PT-BR=tonalidade) is a string (str) and a value is a list of strings.
+        A dictionary with the scale "notes" and "degrees" (PT-BR=graus). Inside of the dictionary, the "degrees" (PT-BR=graus) is a string (str) and a value is a list of strings.
 
     Raises:
         ValueError: When passing a non-existent note.

@@ -44,17 +44,30 @@ def test_scale_key_not_exists():
 
 
 @mark.parametrize(
-    # Arrange
-    'tonic, expected',
+    'tonic, key, expected',
     [
-        ('C', ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
-        ('C#', ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']),
-        ('F', ['F', 'G', 'A', 'A#', 'C', 'D', 'E']),
+        ('C', 'major', ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
+        ('C#', 'major', ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C']),
+        ('F', 'major', ['F', 'G', 'A', 'A#', 'C', 'D', 'E']),
+        ('C', 'minor', ['C', 'D', 'D#', 'F', 'G', 'G#', 'A#']),
+        ('C#', 'minor', ['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B']),
+        ('F', 'minor', ['F', 'G', 'G#', 'A#', 'C', 'C#', 'D#']),
     ],
-)
-def test_scale_must_return_correct_note(tonic, expected):
+)  # Arrange
+def test_scale_must_return_correct_note(tonic, key, expected):
     # Act
-    result = scale(tonic, 'major')
+    result = scale(tonic, key)
 
     # Assert
     assert result['notes'] == expected
+
+
+@mark.parametrize(
+    'tonic, key, expected',
+    [
+        ('c', 'major', ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']),
+    ],
+)  # Arrange
+def test_scale_must_return_seven_degrees(tonic, key, expected):
+    resultado = scale(tonic, key)  # Act
+    assert resultado['degrees'] == expected  # Assert
