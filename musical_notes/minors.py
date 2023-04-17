@@ -1,5 +1,5 @@
 from musical_notes.half_step import half_step
-from musical_notes.triad import triad
+from musical_notes.triads import triad
 
 
 def _minor(chord_notation):

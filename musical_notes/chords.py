@@ -1,6 +1,6 @@
 from musical_notes.half_step import half_step
 from musical_notes.minors import _minor
-from musical_notes.triad import triad
+from musical_notes.triads import triad
 
 
 def chord(chord_notation: str) -> dict[str, list[str]]:
