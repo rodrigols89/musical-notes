@@ -57,3 +57,21 @@ def test_chord_cli_must_contain_all_degrees_in_the_cli_return(degrees):
 
     # Assert
     assert degrees in result.stdout
+
+
+@mark.parametrize(
+    'degree', ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°']
+)  # Arrange
+def test_harmonic_field_cli_must_contain_all_degrees_in_the_cli_return(
+    degree,
+):
+    result = runner.invoke(app, ['harmonic-field', 'C'])  # Act
+    assert degree in result.stdout  # Assert
+
+
+@mark.parametrize(
+    'chord_notation', ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'B°']
+)  # Arrange
+def test_harmonic_field_cli_must_contain_all_chord_notation(chord_notation):
+    result = runner.invoke(app, ['harmonic-field', 'C'])  # Act
+    assert chord_notation in result.stdout  # Assert
