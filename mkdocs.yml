@@ -13,6 +13,13 @@ theme:
 
 markdown_extensions:
   - attr_list # Allow apply styles ![](){width=xxx .center}.
+  - admonition
+  - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 extra_css:
   - stylesheets/extra.css
@@ -21,7 +28,12 @@ watch:
   - musical_notes
 
 plugins:
+- macros
 - mkdocstrings:
     handlers:
       python:
         paths: [musical_notes]
+
+extra:
+  commands:
+    run: musical-notes

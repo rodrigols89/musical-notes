@@ -31,6 +31,10 @@
  - [exit_code (0=Ok, 1=Error)](#exit-code)
  - [Using "stdout" and "pytest -v" to check (test) CLI return](#stdout-pytest-v)
  - [Creating a script (CLI) for our application (Adding our CLI to pyproject.toml)](#creating-scrit-cli)
+ - [How to create macros (variables) with "mkdocs-macros-plugin@latest" and "jinja2"](#macro-var)
+ - [How to create pretty "warnings"](#add-warnings)
+ - [Creating pretty tasks on documentation](#pretty-tasks)
+ - [Creating graph (structure) on our documentation](#graph)
 
 ---
 
@@ -920,6 +924,122 @@ To add Hot-Reload to our mkdocs is very easy:
 watch:
   - musical_notes
 ```
+
+---
+
+<div id="macro-var"></div>
+
+## How to create macros (variables) with "mkdocs-macros-plugin@latest" and "jinja2"
+
+We are repeating many times in the documentation the following command:
+
+```bash
+poetry run musical-notes <subcommand>
+```
+
+To solve that we can create a macro (variables). First, we need to install the following libraries:
+
+```bash
+poetry add --group doc mkdocs-macros-plugin@latest jinja2@latest
+```
+
+Now, we need to setting the macro in the [mkdocs.yml](../mkdocs.yml):
+
+```yaml
+plugins:
+- macros
+- ....
+- ....
+
+extra:
+  commands:
+    run: poetry run musical-notes # (or musical-notes)
+```
+
+Finally, we need only replace the old command by the created macro:
+
+```bash
+{{ commands.run }}
+```
+
+ - **commands:**
+   - `"commands"` is the group of commands.
+ - **run:**
+   - `"run"` is the specific command we want to run.
+
+---
+
+<div id="add-warnings"></div>
+
+## How to create pretty "warnings"
+
+Sometimes we would like to create pretty warning on our documentation. Like this:
+
+![img](images/warnings.png)  
+
+To enable this we need to add **"admonition"** to **"markdown_extensions"** in [mkdocs.yml](../mkdocs.yml):
+
+[mkdocs.yml](../mkdocs.yml)
+```yaml
+markdown_extensions:
+  - admonition
+```
+
+**NOTE:**  
+Now, to create a warning we just need to use `"!!!"` before a sentence and break the line to show the real warning.
+
+For example:
+
+```md
+!!! warning "About chords"
+	It is possible that the chords you are looking for have not yet been implemented. At the time of writing this tutorial, only triad chords have been implemented. Therefore, you can use major, minor, augmented, and diminished chords.
+```
+
+---
+
+<div id="pretty-tasks"></div>
+
+## Creating pretty tasks on documentation
+
+To create task in the documentarion we can use **pymdownx.tasklist**:
+
+[mkdocs.yml](../mkdocs.yml)
+```yaml
+markdown_extensions:
+pymdownx.tasklist
+```
+
+![img](images/tasks.png)  
+
+```md
+- [ ] Implementar novas escalas: [referência](https://en.wikipedia.org/wiki/List_of_musical_scales_and_modes)
+- [ ] Implementar classes customizadas de erros: [Referência oficial](https://docs.python.org/3/tutorial/errors.html#tut-userexceptions), [Referência no canal](https://youtu.be/sJpNfZqLpoI)
+- [ ] Implementar sugestões de progressões harmônicas
+- [ ] Implementar tétrades (notas com mais de 3 acordes):  [referência](https://pt.wikipedia.org/wiki/T%C3%A9trade)
+- [ ] Implementar Funções harmônicas (tonica, dominante, subdominante e relativos): [referência](https://pt.wikipedia.org/wiki/Fun%C3%A7%C3%A3o_(m%C3%BAsica))
+```
+
+---
+
+<div id="graph"></div>
+
+## Creating graph (structure) on our documentation
+
+To create a graph (strucute) on our documentation we need use **"pymdownx.superfences"**:
+
+[mkdocs.yml](../mkdocs.yml)
+```yaml
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+```
+
+Now, we can create a graph structure like this:
+
+![img](images/graph.png)  
 
 ---
 

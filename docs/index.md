@@ -5,7 +5,11 @@ Musical Notes is a **CLI** tool to assist in the formation of **scales**, **chor
 
 The entire application is based on a command called **"musical-notes"**. This command has a subcommand related to each action that the application can perform, such as **scales**, **chords**, and **harmonic fields**.
 
+{% include "templates/cards.html" %}
+
 {% include "templates/installation.md" %}
+
+<div id="how-to-install"></div>
 
 ## How to use?
 
@@ -50,7 +54,7 @@ Result in:
 
 You can also change the **key (PT-BR=tonalidade)** of the scale! This is the second parameter of the command line. For example, the scale of `D# major`:"
 
-```
+```bash
 {{ commands.run }} scale D# major
 
 ┏━━━━┳━━━━┳━━━━━┳━━━━┳━━━━┳━━━━┳━━━━━┓
