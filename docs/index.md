@@ -88,12 +88,12 @@ Basic use:
 
 ---
 
-## Campo harmônico
+## Harmonic Field
 
-Você pode chamar os campos harmônicos via o subcomando `campo-harmonico`. Por exemplo:
+You can call the **Harmonic Fields** via the subcommand `harmonic-field`. For example:
 
 ```bash
-{{ commands.run }} campo-harmonico
+{{ commands.run }} harmonic-field
 
 ┏━━━┳━━━━┳━━━━━┳━━━━┳━━━┳━━━━┳━━━━━━┓
 ┃ I ┃ ii ┃ iii ┃ IV ┃ V ┃ vi ┃ vii° ┃
@@ -102,22 +102,23 @@ Você pode chamar os campos harmônicos via o subcomando `campo-harmonico`. Por 
 └───┴────┴─────┴────┴───┴────┴──────┘
 ```
 
-Por padrão os parâmetros utilizados são a tônica de `C` e o campo harmônico `maior`.
+**NOTE:**  
+By default, the parameters used are the tonic of `C` and the `major` harmonic field.
 
-### Alterações nos campos harmônicos
+#### Changes in the harmonic fields
 
-Você pode alterar os parâmetros da tônica e da tonalidade.
+You can change the parameters of the `tonic note` and `key (tonality)`.
 
 ```bash
-{{ commands.run }} campo-harmonico [TONICA] [TONALIDADE]
+{{ commands.run }} harmonic-field [TONIC] [KEY]
 ```
 
-#### Alteração na tônica do campo
+#### Change in the tonic of the field
 
-Um exemplo com o campo harmônico de `E`:
+An example with the harmonic field of `E`:
 
 ```bash
-{{ commands.run }} campo-harmonico E
+{{ commands.run }} harmonic-field E
 
 ┏━━━┳━━━━━┳━━━━━┳━━━━┳━━━┳━━━━━┳━━━━━━┓
 ┃ I ┃ ii  ┃ iii ┃ IV ┃ V ┃ vi  ┃ vii° ┃
@@ -126,12 +127,13 @@ Um exemplo com o campo harmônico de `E`:
 └───┴─────┴─────┴────┴───┴─────┴──────┘
 ```
 
-#### Alteração da tonalidade do campo
+#### Change in the tonality of the field
 
-Um exemplo utilizando o campo harmônico de `E` na tonalidade `menor`:
+An example using the harmonic field of `E` in the `minor` tonality:
+
 
 ```bash
-{{ commands.run }} campo-harmonico E menor
+{{ commands.run }} harmonic-field E minor
 
 ┏━━━━┳━━━━━┳━━━━━┳━━━━┳━━━━┳━━━━┳━━━━━┓
 ┃ i  ┃ ii° ┃ III ┃ iv ┃ v  ┃ VI ┃ VII ┃
@@ -140,38 +142,44 @@ Um exemplo utilizando o campo harmônico de `E` na tonalidade `menor`:
 └────┴─────┴─────┴────┴────┴────┴─────┘
 ```
 
-## Mais informações sobre o CLI
+## More information about the CLI
 
-Para descobrir outras opções, você pode usar a flag `--help`:
+To discover other options, you can use the `--help` flag:
 
 ```bash
 {{ commands.run }} --help
                                                                        
- Usage: notas-musicais [OPTIONS] COMMAND [ARGS]...
+ Usage: musical-notes [OPTIONS] COMMAND [ARGS]...
 
-╭─ Commands ──────────────────────────────────────────────────────────╮
-│ acorde                                                              │
-│ campo-harmonico                                                     │
-│ escala                                                              │
-╰─────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion        [bash|zsh|fish|powershell|pwsh]  Install completion for the specified shell. [default: None]                               │
+│ --show-completion           [bash|zsh|fish|powershell|pwsh]  Show completion for the specified shell, to copy it or customize the installation.        │
+│                                                              [default: None]                                                                           │
+│ --help                                                       Show this message and exit.                                                               │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ chord                                                                                                                                                  │
+│ harmonic-field                                                                                                                                         │
+│ scale                                                                                                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 ```
 
-### Mais informações sobre os subcomandos
+### More information about subcommands
 
-As informações sobre os subcomandos podem ser acessadas usando a flag `--help` após o nome do parâmetro. Um exemplo do uso do `help` nos campos harmônicos:
+Information about subcommands can be accessed by using the `--help` flag after the parameter name. An example of using `help` on the harmonic fields:
 
 ```bash
-{{ commands.run }} campo-harmonico --help
+{{ commands.run }} harmonic-field --help
                                                                        
- Usage: notas-musicais campo-harmonico [OPTIONS] [TONICA] [TONALIDADE] 
-                                                                       
-╭─ Arguments ─────────────────────────────────────────────────────────╮
-│   tonica          [TONICA]      Tônica do campo harmônico           │
-│                                 [default: c]                        │
-│   tonalidade      [TONALIDADE]  Tonalidade do campo harmônico       │
-│                                 [default: maior]                    │
-╰─────────────────────────────────────────────────────────────────────╯
-╭─ Options ───────────────────────────────────────────────────────────╮
-│ --help          Show this message and exit.                         │
-╰─────────────────────────────────────────────────────────────────────╯
+ Usage: musical-notes harmonic-field [OPTIONS] [TONIC] [KEY]
+
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│   tonic      [TONIC]  Harmonic field tonic note [default: c]                                                                                                                         │
+│   key        [KEY]    Harmonic field key (PT-BR=tonalidade) [default: major]                                                                                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                                                                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 ```
