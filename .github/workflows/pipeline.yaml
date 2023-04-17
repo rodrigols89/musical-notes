@@ -1,0 +1,29 @@
+name: Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy local (repository) files to remote container
+        uses: actions/checkout@v3  # Get latest 3.x
+
+      - name: Install Python
+        uses: actions/setup-python@v4  # Get latest 4.x
+        with:
+          python-version: '3.11.0'
+
+      - name: Install Poetry tool
+        run: pip install poetry
+
+      - name: Install project dependencies
+        run: poetry install --without doc  # No install doc dependencies.
+
+      - name: Run tests
+        run: poetry run task test --cov-report=xml  # Use poetry to run test without env.
+
+      - name: Up coverage for codecov
+        uses: codecov/codecov-action@v3  # Get latest 3.x
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
