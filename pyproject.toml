@@ -1,10 +1,23 @@
 [tool.poetry]
 name = "musical-notes"
 version = "0.1.0"
-description = ""
+description = "Musical Notes CLI: A command-line tool for music students to practice identifying and memorizing musical notes."
+license = "MIT"
 authors = ["drigols <drigols.creative@gmail.com>"]
 readme = "README.md"
 packages = [{include = "musical_notes"}]
+classifiers = [
+    "Topic :: Education",
+    "Environment :: Console",
+    "Natural Language :: English",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.11",
+]
+
+[tool.poetry.urls]
+"Documentation" = "https://musical-notes.readthedocs.io/en/latest/"
+"Repository" = "https://github.com/drigols/musical-notes"
+"Issue Tracker" = "https://github.com/drigols/musical-notes/issues"
 
 [tool.poetry.scripts]
 musical-notes = "musical_notes.cli:app"
