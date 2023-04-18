@@ -35,6 +35,7 @@
  - [How to create pretty "warnings"](#add-warnings)
  - [Creating pretty tasks on documentation](#pretty-tasks)
  - [Creating graph (structure) on our documentation](#graph)
+ - [Go up "Read The Docs" for Web](#go-up-docs)
 
 ---
 
@@ -1040,6 +1041,50 @@ markdown_extensions:
 Now, we can create a graph structure like this:
 
 ![img](images/graph.png)  
+
+---
+
+<div id="go-up-docs"></div>
+
+## Go up "Read The Docs" for Web
+
+To go up "Read The Docs" for Web first we need login on Read The Docs page: [https://readthedocs.org/](https://readthedocs.org/)
+
+ - Import project:
+   - Select you project
+     - Build Version
+
+Now, you need to configure the mkdocs of you repository in [.readthedocs.yaml](../.readthedocs.yaml)
+
+[.readthedocs.yaml](../.readthedocs.yaml)
+```yaml
+version: 2
+
+mkdocs:
+  configuration: mkdocs.yml
+
+build:
+  os: ubuntu-latest
+  tools:
+    python: "3.11"
+  jobs:
+    post_create_environment:
+      # Install poetry
+      # https://python-poetry.org/docs/#installing-manually
+      - pip install poetry
+      # Tell poetry to not use a virtual environment
+      - poetry config virtualenvs.create false
+    post_install:
+      # Install dependencies with 'docs' dependency group
+      # https://python-poetry.org/docs/managing-dependencies/#dependency-groups
+      - poetry install --only doc  # Install "only" doc dependencies
+```
+
+To understanding the process see the links below:
+
+[Configuration file v2](https://docs.readthedocs.io/en/stable/config-file/v2.html)  
+[build.jobs](https://docs.readthedocs.io/en/stable/config-file/v2.html#build-jobs)  
+[Install dependencies with Poetry](https://docs.readthedocs.io/en/stable/build-customization.html#install-dependencies-with-poetry)  
 
 ---
 
