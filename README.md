@@ -5,6 +5,7 @@
 [![Documentation Status](https://readthedocs.org/projects/musical-notes/badge/?version=latest)](https://musical-notes.readthedocs.io/en/latest/)
 [![CI](https://github.com/drigols/musical-notes/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/drigols/musical-notes/actions/workflows/pipeline.yaml)
 [![codecov](https://codecov.io/gh/drigols/musical-notes/branch/master/graph/badge.svg?token=QYMBUYB4HF)](https://app.codecov.io/gh/drigols/musical-notes)
+[![PyPI version](https://badge.fury.io/py/musical-notes.svg)](https://badge.fury.io/py/musical-notes)
 
 Musical Notes is a **CLI** tool to assist in the formation of **scales**, **chords**, and **harmonic fields**.
 
