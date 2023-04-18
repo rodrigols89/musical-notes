@@ -36,6 +36,8 @@
  - [Creating pretty tasks on documentation](#pretty-tasks)
  - [Creating graph (structure) on our documentation](#graph)
  - [Go up "Read The Docs" for Web](#go-up-docs)
+ - [Publishing the project on PyPi](#publishing)
+ - [Choosing project version](#project-version)
 
 ---
 
@@ -1088,19 +1090,124 @@ To understanding the process see the links below:
 
 ---
 
-Ro**drigo** **L**eite da **S**ilva - **drigols**
+<div id="publishing"></div>
 
-[](../)
+## Publishing the project on PyPi
+
+To publish the project on Pypi is very easy with Poetry, just run the following command:
+
+```bash
+poetry publish --build
+```
+
+**NOTE:**  
+However, first we need to configure some things, like Docs, Repository, etc... In [pyproject.toml](../pyproject.toml). You can check the PiPy documentation [Creating the package files](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+
+For example, first let's add some classifiers. For it, let's use the PyPi classifiers references: [Classifiers](https://pypi.org/classifiers/)
+
+[pyproject.toml](../pyproject.toml)
 ```python
-
+classifiers = [
+    "Topic :: Education",
+    "Environment :: Console",
+    "Natural Language :: English",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.11",
+]
 ```
 
-**RUN TASK:**  
-```
-task test
+Now, let's create the section to URLs. For it, let's use `[tool.poetry.urls]` section:
+
+[pyproject.toml](../pyproject.toml)
+```python
+[tool.poetry.urls]
+"Documentation" = "https://musical-notes.readthedocs.io/en/latest/"
+"Repository" = "https://github.com/drigols/musical-notes"
+"Issue Tracker" = "https://github.com/drigols/musical-notes/issues"
 ```
 
-**OUTPUT:**  
+---
+
+<div id="project-version"></div>
+
+## Choosing project version
+
+To choose the project version we need to pay attention to some things. For example, see the code version below:
+
+[pyproject.toml](../pyproject.toml)
+```python
+version = "0.1.0"
 ```
 
+That means:
+
+```python
+Major - 0
+Minor - 1
+Patch - 0
 ```
+
+> All Software starts from version `"0.0.0"`:
+
+Always you have a stable version we increment a **"minor"** in the software. Then we continue to increment the patch until stays in another stable version. For example:
+
+```python
+Major - 0
+Minor - 1
+Patch - 0 > 1 > 2 > 3 > ... > Until another software stable version
+
+Major - 0
+Minor - 2
+Patch - 0 > 1 > 2 > 3 > ... > Until another software stable 
+
+Major - 0
+Minor - 3
+Patch - 0 > 1 > 2 > 3 > ... > Until another software stable 
+```
+
+> And the **"Major"** when it goes up?
+
+**NOTE:**  
+When we have an **"incompatible version"** we go up the "major".
+
+Then, we continue the process, however, always we add a new feature we increment the **"minor"**:
+
+```python
+Major - 1
+Minor - 0 > new feature (1) > new feature (2) > new feature (n)
+Patch - 0
+```
+
+> And the **"Patch"** when it goes up?
+
+**NOTE:**  
+The **"Patch"** go up always we `solve a "bug"`. For example:
+
+```python
+Major - 1
+Minor - 2
+Patch - 0 > Bug solved (1) > Bug solved (2) > Bug solved (n)
+```
+
+ - **In short:**
+   - **Always we add a `new feature`:**
+     - We increment a `"minor"`.
+   - **Always we that `solve a bug`:**
+     - We increment a `"patch"`.
+   - **Always that something `breaks the software`:**
+     - We increment a `"major"`.
+     - For example, change the CLI command.
+
+For our project let's start with version `"0.1.0"`, that's the first stable version of our project.
+
+[pyproject.toml](../pyproject.toml)
+```python
+version = "0.1.0"
+```
+
+**NOTE:**  
+To understand more about project version see [Semantic Versioning](https://semver.org/).
+
+---
+
+Ro**drigo** **L**eite da **S**ilva - **drigols**
