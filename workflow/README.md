@@ -1097,7 +1097,7 @@ To understanding the process see the links below:
 To publish the project on Pypi is very easy with Poetry, just run the following command:
 
 ```bash
-poetry publish --build
+poetry publish --build --username=pypi-username --password=pypi-password
 ```
 
 **NOTE:**  
