@@ -224,30 +224,30 @@ You can also use the [main documentation](https://musical-notes.readthedocs.io/e
 ## Tech Stack
 
  - **Programming Languages:**
-   - Python
+   - [Python](https://www.python.org/)
  - **CLI:**
-   - Typer
-   - Rich
+   - [Typer](https://typer.tiangolo.com/)
+   - [Rich](https://github.com/Textualize/rich)
  - **Test:**
-   - Pytest
-   - Pytest-cov
+   - [Pytest](https://docs.pytest.org/)
+   - [Pytest-cov](https://github.com/pytest-dev/pytest-cov)
  - **Linters:**
-   - blue
-   - isort
+   - [blue](https://blue.readthedocs.io/en/latest/)
+   - [isort](https://pycqa.github.io/isort/)
  - **Project management:**
-   - VSCode
-     - .editorconfig extension
-   - Poetry
-   - taskipy
-   - Git
-   - GitHub Actions
+   - [VSCode](https://code.visualstudio.com/)
+     - [.editorconfig extension](https://editorconfig.org/)
+   - [Poetry](https://python-poetry.org/)
+   - [taskipy](https://github.com/taskipy/taskipy)
+   - [Git](https://git-scm.com/)
+   - [GitHub Actions](https://docs.github.com/en/actions)
  - **Documentation:**
    - [The Read Docs](https://readthedocs.org/)
-   - mkdocs-material
-   - mkdocstrings
-   - mkdocstrings-python
-   - mkdocs-macros-plugin
-   - jinja2
+   - [mkdocs-material](https://squidfunk.github.io/mkdocs-material/)
+   - [mkdocstrings](https://mkdocstrings.github.io/)
+   - [mkdocstrings-python](https://mkdocstrings.github.io/python/)
+   - [mkdocs-macros-plugin](https://mkdocs-macros-plugin.readthedocs.io/en/latest/)
+   - [jinja2](https://palletsprojects.com/p/jinja/)
 
 ---
 
