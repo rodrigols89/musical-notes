@@ -3,8 +3,8 @@
 # Musical Notes
 
 [![Documentation Status](https://readthedocs.org/projects/musical-notes/badge/?version=latest)](https://musical-notes.readthedocs.io/en/latest/)
-[![CI](https://github.com/drigols/musical-notes/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/drigols/musical-notes/actions/workflows/pipeline.yaml)
-[![codecov](https://codecov.io/gh/drigols/musical-notes/branch/master/graph/badge.svg?token=QYMBUYB4HF)](https://app.codecov.io/gh/drigols/musical-notes)
+[![CI](https://github.com/rodrigols89/musical-notes/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/rodrigols89/musical-notes/actions/workflows/pipeline.yaml)
+[![codecov](https://codecov.io/gh/rodrigols89/musical-notes/branch/master/graph/badge.svg?token=QYMBUYB4HF)](https://app.codecov.io/gh/rodrigols89/musical-notes)
 [![PyPI version](https://badge.fury.io/py/musical-notes.svg)](https://badge.fury.io/py/musical-notes)
 
 Musical Notes is a **CLI** tool to assist in the formation of **scales**, **chords**, and **harmonic fields**.
@@ -257,3 +257,7 @@ You can also use the [main documentation](https://musical-notes.readthedocs.io/e
 ## Credits
 
 The project credits are to [Eduardo Mendes](https://www.youtube.com/@Dunossauro) Youtube channel. I followed the ["Construindo um pacote Python do zero #CodaComigo"](https://www.youtube.com/playlist?list=PLOQgLBuj2-3LiHhK1upnjpHiFzcJ472QS) playlist to develop this project. However, I translated all the project to English.
+
+---
+
+**Rodrigo** **L**eite da **S**ilva
